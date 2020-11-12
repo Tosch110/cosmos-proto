@@ -1,0 +1,1 @@
+protoc --doc_out=./doc --doc_opt=html,index.html -Ithird_party third_party/*/*.proto -Iproto proto/*/*/*/*.proto 
