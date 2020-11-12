@@ -16,8 +16,6 @@ var tendermint_types_validator_pb = require('../../../../tendermint/types/valida
 goog.object.extend(proto, tendermint_types_validator_pb);
 var tendermint_types_types_pb = require('../../../../tendermint/types/types_pb.js');
 goog.object.extend(proto, tendermint_types_types_pb);
-var tendermint_abci_types_pb = require('../../../../tendermint/abci/types_pb.js');
-goog.object.extend(proto, tendermint_abci_types_pb);
 var confio_proofs_pb = require('../../../../confio/proofs_pb.js');
 goog.object.extend(proto, confio_proofs_pb);
 var google_protobuf_duration_pb = require('google-protobuf/google/protobuf/duration_pb.js');
@@ -146,7 +144,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.ibc.lightclients.tendermint.v1.ClientState.repeatedFields_ = [9];
+proto.ibc.lightclients.tendermint.v1.ClientState.repeatedFields_ = [8];
 
 
 
@@ -186,12 +184,11 @@ proto.ibc.lightclients.tendermint.v1.ClientState.toObject = function(includeInst
     maxClockDrift: (f = msg.getMaxClockDrift()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
     frozenHeight: (f = msg.getFrozenHeight()) && ibc_core_client_v1_client_pb.Height.toObject(includeInstance, f),
     latestHeight: (f = msg.getLatestHeight()) && ibc_core_client_v1_client_pb.Height.toObject(includeInstance, f),
-    consensusParams: (f = msg.getConsensusParams()) && tendermint_abci_types_pb.ConsensusParams.toObject(includeInstance, f),
     proofSpecsList: jspb.Message.toObjectList(msg.getProofSpecsList(),
     confio_proofs_pb.ProofSpec.toObject, includeInstance),
-    upgradePath: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    allowUpdateAfterExpiry: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
-    allowUpdateAfterMisbehaviour: jspb.Message.getBooleanFieldWithDefault(msg, 12, false)
+    upgradePath: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    allowUpdateAfterExpiry: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+    allowUpdateAfterMisbehaviour: jspb.Message.getBooleanFieldWithDefault(msg, 11, false)
   };
 
   if (includeInstance) {
@@ -263,24 +260,19 @@ proto.ibc.lightclients.tendermint.v1.ClientState.deserializeBinaryFromReader = f
       msg.setLatestHeight(value);
       break;
     case 8:
-      var value = new tendermint_abci_types_pb.ConsensusParams;
-      reader.readMessage(value,tendermint_abci_types_pb.ConsensusParams.deserializeBinaryFromReader);
-      msg.setConsensusParams(value);
-      break;
-    case 9:
       var value = new confio_proofs_pb.ProofSpec;
       reader.readMessage(value,confio_proofs_pb.ProofSpec.deserializeBinaryFromReader);
       msg.addProofSpecs(value);
       break;
-    case 10:
+    case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.setUpgradePath(value);
       break;
-    case 11:
+    case 10:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setAllowUpdateAfterExpiry(value);
       break;
-    case 12:
+    case 11:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setAllowUpdateAfterMisbehaviour(value);
       break;
@@ -368,18 +360,10 @@ proto.ibc.lightclients.tendermint.v1.ClientState.serializeBinaryToWriter = funct
       ibc_core_client_v1_client_pb.Height.serializeBinaryToWriter
     );
   }
-  f = message.getConsensusParams();
-  if (f != null) {
-    writer.writeMessage(
-      8,
-      f,
-      tendermint_abci_types_pb.ConsensusParams.serializeBinaryToWriter
-    );
-  }
   f = message.getProofSpecsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      9,
+      8,
       f,
       confio_proofs_pb.ProofSpec.serializeBinaryToWriter
     );
@@ -387,21 +371,21 @@ proto.ibc.lightclients.tendermint.v1.ClientState.serializeBinaryToWriter = funct
   f = message.getUpgradePath();
   if (f.length > 0) {
     writer.writeString(
-      10,
+      9,
       f
     );
   }
   f = message.getAllowUpdateAfterExpiry();
   if (f) {
     writer.writeBool(
-      11,
+      10,
       f
     );
   }
   f = message.getAllowUpdateAfterMisbehaviour();
   if (f) {
     writer.writeBool(
-      12,
+      11,
       f
     );
   }
@@ -649,49 +633,12 @@ proto.ibc.lightclients.tendermint.v1.ClientState.prototype.hasLatestHeight = fun
 
 
 /**
- * optional tendermint.abci.ConsensusParams consensus_params = 8;
- * @return {?proto.tendermint.abci.ConsensusParams}
- */
-proto.ibc.lightclients.tendermint.v1.ClientState.prototype.getConsensusParams = function() {
-  return /** @type{?proto.tendermint.abci.ConsensusParams} */ (
-    jspb.Message.getWrapperField(this, tendermint_abci_types_pb.ConsensusParams, 8));
-};
-
-
-/**
- * @param {?proto.tendermint.abci.ConsensusParams|undefined} value
- * @return {!proto.ibc.lightclients.tendermint.v1.ClientState} returns this
-*/
-proto.ibc.lightclients.tendermint.v1.ClientState.prototype.setConsensusParams = function(value) {
-  return jspb.Message.setWrapperField(this, 8, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.ibc.lightclients.tendermint.v1.ClientState} returns this
- */
-proto.ibc.lightclients.tendermint.v1.ClientState.prototype.clearConsensusParams = function() {
-  return this.setConsensusParams(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.ibc.lightclients.tendermint.v1.ClientState.prototype.hasConsensusParams = function() {
-  return jspb.Message.getField(this, 8) != null;
-};
-
-
-/**
- * repeated ics23.ProofSpec proof_specs = 9;
+ * repeated ics23.ProofSpec proof_specs = 8;
  * @return {!Array<!proto.ics23.ProofSpec>}
  */
 proto.ibc.lightclients.tendermint.v1.ClientState.prototype.getProofSpecsList = function() {
   return /** @type{!Array<!proto.ics23.ProofSpec>} */ (
-    jspb.Message.getRepeatedWrapperField(this, confio_proofs_pb.ProofSpec, 9));
+    jspb.Message.getRepeatedWrapperField(this, confio_proofs_pb.ProofSpec, 8));
 };
 
 
@@ -700,7 +647,7 @@ proto.ibc.lightclients.tendermint.v1.ClientState.prototype.getProofSpecsList = f
  * @return {!proto.ibc.lightclients.tendermint.v1.ClientState} returns this
 */
 proto.ibc.lightclients.tendermint.v1.ClientState.prototype.setProofSpecsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 9, value);
+  return jspb.Message.setRepeatedWrapperField(this, 8, value);
 };
 
 
@@ -710,7 +657,7 @@ proto.ibc.lightclients.tendermint.v1.ClientState.prototype.setProofSpecsList = f
  * @return {!proto.ics23.ProofSpec}
  */
 proto.ibc.lightclients.tendermint.v1.ClientState.prototype.addProofSpecs = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 9, opt_value, proto.ics23.ProofSpec, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 8, opt_value, proto.ics23.ProofSpec, opt_index);
 };
 
 
@@ -724,11 +671,11 @@ proto.ibc.lightclients.tendermint.v1.ClientState.prototype.clearProofSpecsList =
 
 
 /**
- * optional string upgrade_path = 10;
+ * optional string upgrade_path = 9;
  * @return {string}
  */
 proto.ibc.lightclients.tendermint.v1.ClientState.prototype.getUpgradePath = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
 
@@ -737,16 +684,16 @@ proto.ibc.lightclients.tendermint.v1.ClientState.prototype.getUpgradePath = func
  * @return {!proto.ibc.lightclients.tendermint.v1.ClientState} returns this
  */
 proto.ibc.lightclients.tendermint.v1.ClientState.prototype.setUpgradePath = function(value) {
-  return jspb.Message.setProto3StringField(this, 10, value);
+  return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
 /**
- * optional bool allow_update_after_expiry = 11;
+ * optional bool allow_update_after_expiry = 10;
  * @return {boolean}
  */
 proto.ibc.lightclients.tendermint.v1.ClientState.prototype.getAllowUpdateAfterExpiry = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 10, false));
 };
 
 
@@ -755,16 +702,16 @@ proto.ibc.lightclients.tendermint.v1.ClientState.prototype.getAllowUpdateAfterEx
  * @return {!proto.ibc.lightclients.tendermint.v1.ClientState} returns this
  */
 proto.ibc.lightclients.tendermint.v1.ClientState.prototype.setAllowUpdateAfterExpiry = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 11, value);
+  return jspb.Message.setProto3BooleanField(this, 10, value);
 };
 
 
 /**
- * optional bool allow_update_after_misbehaviour = 12;
+ * optional bool allow_update_after_misbehaviour = 11;
  * @return {boolean}
  */
 proto.ibc.lightclients.tendermint.v1.ClientState.prototype.getAllowUpdateAfterMisbehaviour = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
 };
 
 
@@ -773,7 +720,7 @@ proto.ibc.lightclients.tendermint.v1.ClientState.prototype.getAllowUpdateAfterMi
  * @return {!proto.ibc.lightclients.tendermint.v1.ClientState} returns this
  */
 proto.ibc.lightclients.tendermint.v1.ClientState.prototype.setAllowUpdateAfterMisbehaviour = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 12, value);
+  return jspb.Message.setProto3BooleanField(this, 11, value);
 };
 
 
