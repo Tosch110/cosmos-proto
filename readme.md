@@ -2,7 +2,13 @@
 
 Use `pull_proto.sh` to pull proto files from the Cosmos SDK
 
-Use `create_docs.sh` to create a documentation for the proto files
+Use `create_js.sh` to create JavaScript out of the proto files
+
+Find documentation in Markdown or HTML in [/docs](./docs)
+
+The compiled JavaScript is available in the `/build` directory.
+
+Proto files can be found in `/proto` and `/third_party/proto`
 
 ## Requirements
 
@@ -12,5 +18,5 @@ protoc-gen-doc for generating the documentation from the files
 
 ```bash
 brew install svn
-go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+brew install protobuf
 ```
