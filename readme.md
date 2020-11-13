@@ -14,7 +14,7 @@ Proto files can be found in `/proto` and `/third_party/proto`
 
 SVN for github pull of the proto files
 
-protoc-gen-doc for generating the documentation from the files
+`protoc` for protocol buffer compiling
 
 ```bash
 brew install svn
